@@ -3,8 +3,8 @@ FROM alpine:3.14
 LABEL name="default" \
   version="1.0.0" \
   source="https://github.com/madhuakula/docker-security-checker/blob/master/policy/security.rego" \
-  summary="Alpine JDK 11 Image." #\
-  #team="THD CNS Team"
+  summary="Alpine JDK 11 Image."
+# team="THD CNS Team"
 
 RUN apk update && apk add ca-certificates && rm -rf /var/cache/apk/*
 RUN update-ca-certificates
