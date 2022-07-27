@@ -1,0 +1,41 @@
+name: CI with Dockerfile scan
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+#    env:
+#      imageTag: 'alpine-jdk:11'
+      
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Checkout GitHub Action Template Repo
+      uses: actions/checkout@v3
+      with:
+        repository: asaifee02/cns-composite-action
+        ref: main
+        token: '${{ github.token }}'
+        path: .github/actions/
+    
+    - name: Dockerfile Scan
+      uses: ./.github/actions/dockerfile-scan
+      with:
+        conftest-version: 'v0.33.2'
+        dockerfile-name: "Dockerfile"
+
+#    - name: Build Docker Image
+#      uses: ./.github/actions/docker-build
+#      with:
+#        name: alpine-jsk11
+#        version: "11"
+#        source: "http://dl-cdn.alpinelinux.org/alpine/edge/community"
+#        summary: "Alpine JDK 11 Docker Image"
+#        team: "Saifee DevOps"
+#        author: "Adnan Saifee"
+#        image-tag: '${{ env.imageTag }}'
