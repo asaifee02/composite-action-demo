@@ -20,7 +20,7 @@ jobs:
       with:
         repository: asaifee02/cns-composite-action
         ref: main
-        token: '${{ github.token }}'
+        token: '${{ secrets.PAT_TOKEN }}'
         path: .github/actions/
     
     - name: Dockerfile Scan
